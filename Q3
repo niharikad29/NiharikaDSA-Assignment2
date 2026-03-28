@@ -1,81 +1,55 @@
 #include <stdio.h>
-#include <string.h>
 #define MAX 100
 
-char queue[MAX][50];
-int front = -1, rear = -1;
+int stack[MAX];
+int top = -1;
 
-// Add document to queue
-void enqueue(char doc[]) {
-    if (rear == MAX - 1) {
-        printf("Queue is Full\n");
-        return;
-    }
-
-    // If first element
-    if (front == -1) {
-        front = 0;
-    }
-
-    rear++;
-    strcpy(queue[rear], doc); // copy doc name
-    printf("Document added: %s\n", doc);
+// Push index onto stack
+void push(int x) {
+    stack[++top] = x;
 }
 
-void dequeue() {
-    if (front == -1 || front > rear) {
-        printf("No documents to print\n");
-        return;
-    }
-
-    printf("Printing: %s\n", queue[front]);
-    front++;
-
-    if (front > rear) {
-        front = rear = -1;
-    }
+int pop() {
+    return stack[top--];
 }
 
-void display() {
-    if (front == -1) {
-        printf("No pending documents\n");
-        return;
-    }
-
-    printf("Pending Documents:\n");
-    for (int i = front; i <= rear; i++) {
-        printf("%s\n", queue[i]);
-    }
+int isEmpty() {
+    return top == -1;
 }
 
 int main() {
-    int choice;
-    char doc[80];
+    int arr[MAX], n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
 
-    while (1) {
-        printf("1. Add Document\n");
-        printf("2. Print Document\n");
-        printf("3. Display Queue\n");
-        printf("4. Exit\n");
-        printf("Enter choice: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                printf("Enter doc name: ");
-                scanf("%s", doc);
-                enqueue(doc);
-                break;
-            case 2:
-                dequeue();
-                break;
-            case 3:
-                display();
-                break;
-            case 4:
-                return 0;
-            default:
-                printf("Invalid choice\n");
-        }
+    printf("Enter elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
     }
+
+    int result[MAX]; // to store next greater elements
+
+    // Traversing from right to left
+    for (int i = n - 1; i >= 0; i--) {
+        // To remove all smaller/equal elements from stack
+        while (!isEmpty() && stack[top] <= arr[i]) {
+            pop();
+        }
+
+        // If stack is empty -> no greater element
+        if (isEmpty()) {
+            result[i] = -1;
+        } else {
+            result[i] = stack[top];
+        }
+
+        push(arr[i]);
+    }
+
+    printf("Next Greater Elements:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d -> %d\n", arr[i], result[i]);
+    }
+
+    return 0;
 }
