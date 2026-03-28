@@ -1,0 +1,75 @@
+1) 
+1. Start
+2. Initialize an empty stack
+3. Input a string
+4. Push each character of the string onto the stack one by one
+5. Pop each character from the stack and overwrite the string
+6. Print the reversed string
+7. Stop
+
+
+2)
+1. Start
+2. Input an expression
+3. Traverse each character of the expression:
+   a. If '(' → push onto stack
+   b. If ')' → check if stack is empty
+        - If empty → print "Not balanced" and exit
+        - Else → pop from stack
+4. After traversal:
+   - If stack is empty → print "Balanced Expression"
+   - Else → print "Not Balanced Expression"
+5. Stop
+
+3)
+1. Start
+2. Input array of n elements
+3. Traverse array from right to left:
+   a. While stack is not empty AND
+      top of stack <= current element → pop
+   b. If stack is empty → result[i] = -1
+   c. Else → result[i] = top of stack
+   d. Push current element onto stack
+4. Print each element with its next greater element
+5. Stop
+
+4)
+1. Start
+2. Display menu:
+   1. Add Document
+   2. Print Document
+   3. Display Queue
+   4. Exit
+3. For Add Document (Enqueue):
+   - If queue is full → print "Queue is Full"
+   - Else → add document name to rear of queue
+4. For Print Document (Dequeue):
+   - If queue is empty → print "No documents to print"
+   - Else → print front document and remove it
+5. For Display:
+   - Print all pending documents in queue
+6. Repeat until Exit
+7. Stop
+
+
+5)
+1. Start
+2. Initialize front = -1, rear = -1
+3. isFull()  → check if (front == (rear+1) % MAX)
+4. isEmpty() → check if (front == -1)
+5. Enqueue(x):
+   - If full → print "Queue is Full"
+   - If empty → front = rear = 0
+   - Else → rear = (rear+1) % MAX
+   - queue[rear] = x
+6. Dequeue():
+   - If empty → print "Queue is Empty"
+   - Print deleted element
+   - If front == rear → front = rear = -1
+   - Else → front = (front+1) % MAX
+7. Peek():
+   - Print queue[front]
+8. Display():
+   - Traverse from front to rear circularly and print
+9. Repeat menu until Exit
+10. Stop
