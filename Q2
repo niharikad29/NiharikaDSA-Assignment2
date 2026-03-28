@@ -1,0 +1,43 @@
+#include <stdio.h>
+#define MAX 100
+
+char stack[MAX]; // to store opening brackets
+int top = -1;    // top of stack
+
+// Function to push elements into stack
+void push(char x) {
+    stack[++top] = x;
+}
+
+// Function to pop element from stack
+void pop(char x) {
+    top--; // to remove top element
+}
+
+int main() {
+    char exp[MAX]; // to store input expression
+    int i = 0;
+    printf("Enter expression: ");
+    scanf("%s", exp);
+
+    while (exp[i] != '\0') {
+        if (exp[i] == '(') {
+            push('(');
+        } else if (exp[i] == ')') {
+            if (top == -1) { // if no matching opening bracket
+                printf("Not balanced\n");
+                return 0;
+            }
+            pop('('); // pop matching opening bracket
+        }
+        i++;
+    }
+
+    if (top == -1) {
+        printf("Balanced Expression\n"); // stack empty
+    } else {
+        printf("Not Balanced Expression\n"); // stack not empty
+    }
+
+    return 0;
+}
