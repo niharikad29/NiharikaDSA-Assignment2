@@ -1,2 +1,4 @@
-# NiharikaDSA-Assignment2
-Application of Stack and Queue
+Name: Niharika D 
+Roll number: 07 
+Course Name: Computing and Data science
+Assignment Description: Application of Stack and Queue
